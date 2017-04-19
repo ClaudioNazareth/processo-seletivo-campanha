@@ -1,0 +1,39 @@
+//PLUGINS
+plugins {
+    id 'org.springframework.boot' version '1.5.2.RELEASE'
+    id 'java'
+}
+
+group 'br.com.campanha'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-web', version : '1.5.2.RELEASE')
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb')
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter-hateoas')
+    compile(group: 'de.flapdoodle.embed', name: 'de.flapdoodle.embed.mongo', version: '1.50.5')
+    compile(group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1')
+    compile(group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.1')
+    compile(group: 'com.google.guava', name: 'guava', version: '21.0')
+
+    testCompile(group: 'com.jayway.jsonpath', name: 'json-path')
+    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test')
+}
+
+//Configuraçao para iniciar o mongoDB junto com a inicializaçao da aplicaçao
+jar {
+    baseName = 'gs-accessing-data-mongodb'
+    version =  '0.1.0'
+}
+
+//Configuraçao Gradle Wrapper
+task wrapper (type: Wrapper){
+    gradleVersion = '3.5.0'
+}
