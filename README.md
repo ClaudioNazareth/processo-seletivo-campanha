@@ -2,12 +2,11 @@
 
 ## Information
 
-## Information
-
-- Porta :8080
-- Para iniciar a applicaçao execute : --> gradle bootRun 
-- Para ver a documentaçao das APIS rest veja --> /documentation/index.html
-- Java code coverage 
+- Porta da aplicação :8080
+- Para iniciar a aplicação execute : --> gradle bootRun 
+- Para ver a documentação das APIS rest veja --> /documentation/index.html
+- Para log favor consultar o arquivo camapanha.log criado na raiz da aplicaçao
+- Java code coverage : 
 
 ## Technologies and frameworks used and reasons
 
