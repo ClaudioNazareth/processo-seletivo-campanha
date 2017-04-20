@@ -26,11 +26,11 @@ public class CampanhaRepositoryTest {
     public void deveTrazeApenasCampanhasValidas() throws Exception {
 
         assertThat(campanhaRepository.buscaTodasAsCampanhasAtivas(LocalDate.of(2017, 9, 02)))
-                .as("Nenhuma campanha deve ser retornada pois nao existe Campanhas ativas")
+                .as("Nenhuma campanha deve ser retornada pois nao existe Campanhas ativas(Data de inicio de vegencia e maior que data do parametro)")
                 .isNullOrEmpty();
 
         assertThat(campanhaRepository.buscaTodasAsCampanhasAtivas(LocalDate.of(2017, 10, 05)))
-                .as("Nenhuma campanha deve ser retornada pois todas estao vencidas")
+                .as("Nenhuma campanha deve ser retornada pois todas estao vencidas(Data de fim vigencia e menor que a data do parametro)")
                 .isNullOrEmpty();
 
         assertThat(campanhaRepository.buscaTodasAsCampanhasAtivas(LocalDate.of(2017, 10, 03)))
