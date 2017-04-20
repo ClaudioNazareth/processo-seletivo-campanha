@@ -1,5 +1,9 @@
 package br.com.campanha.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -28,20 +32,32 @@ public class Campanha {
     private String nome;
 
     @NotNull(message="A identifição do time é obrigatório!")
-    @Field(value = "timeCoracao")
+    @Field(value = "timeCoracaoId")
     private String timeCoracaoId;
 
     @Indexed
     @NotNull(message="O inicio da vigencia é obrigatório!")
     @Field(value = "inicioVigencia")
+    @JsonSerialize(using = ToStringSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate inicioVigencia;
 
     @Indexed
     @NotNull(message="O fim vigencia é obrigatório!")
     @Field(value = "fimVigencia")
+    @JsonSerialize(using = ToStringSerializer.class)
+    @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate fimVigencia;
 
     public Campanha() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getNome() {
