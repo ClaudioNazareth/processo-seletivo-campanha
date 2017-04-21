@@ -64,4 +64,23 @@ public class CampanhaServiceTest {
 
     }
 
+    @Test
+    public void buscarCampanhasAtivasPorPeriodo(){
+
+        assertThat(campanhaService.buscarCampanhasAtivasPorPeriodo(
+                LocalDate.of(2017, 10, 01), LocalDate.of(2017, 10, 02)))
+                .as("Deve trazersomente uma Campanha (Campanha 2) dado que somente ela esta dentro da vigência deste período")
+                .hasSize(1);
+
+        assertThat(campanhaService.buscarCampanhasAtivasPorPeriodo(
+                LocalDate.of(2017, 10, 01), LocalDate.of(2017, 10, 03)))
+                .as("Deve trazer as duas Campanhas ativas dado que todas estão com a vigência dentro deste período")
+                .hasSize(2);
+
+        assertThat(campanhaService.buscarCampanhasAtivasPorPeriodo(
+                LocalDate.of(2017, 10, 01), LocalDate.of(2017, 10, 04)))
+                .as("Deve trazer as duas Campanhas ativas dado que todas estão com a vigência dentro deste período")
+                .hasSize(2);
+    }
+
 }
