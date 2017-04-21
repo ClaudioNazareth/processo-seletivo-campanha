@@ -62,8 +62,8 @@ Incluindo campanha 3 : 01/10/2017 a 03/10/2017
     - 200 OK - para GET requests.
     - 201 Created - para POST.
     - 204 No Content - para PUT, PATCH, e DELETE requests.
-    - Usei alguns principios de HETEOAS para a API, no qual cara recurso tem o self link e para criação de recursos 
-      retorno o link para o recurso criado.
+    - Usei alguns principios de HETEOAS para a API na qual cada recurso tem o **self link** e para criação de novos recursos 
+      é retornado o link para o recurso criado.
 
 - Java code coverage : 100 % nos pacotes de Rest Controller, Domain e Service  
                      : 75% das classes | 74% dos Metodos e 74% das linhas de código       
