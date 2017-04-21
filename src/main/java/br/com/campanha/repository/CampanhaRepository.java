@@ -16,7 +16,10 @@ import java.util.List;
 @Repository
 public interface CampanhaRepository extends MongoRepository<Campanha, String> {
 
-    @Query("{ 'inicioVigencia' : { $lte: ?0}, 'fimVigencia' : {$gte: ?0} }")
-    List<Campanha> buscaTodasAsCampanhasAtivas(LocalDate localDate);
+    @Query("{ 'inicioVigencia' : { $lte: ?0 }, 'fimVigencia' : { $gte: ?0 } }, $orderby: { fimVigencia : 1 } ")
+    List<Campanha> buscarTodasAsCampanhasAtivas(LocalDate hoje);
+
+    @Query("{ 'inicioVigencia' : { $gte: ?0, $lte: ?1}, 'fimVigencia' : { $gte: ?0, $lte: ?1 } } , $orderby: { fimVigencia : 1 }")
+    List<Campanha> buscarCampanhasAtivasPorPeriodo(LocalDate inicioVigencia, LocalDate fimVigencia);
 
 }

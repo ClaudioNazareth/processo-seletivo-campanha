@@ -28,13 +28,13 @@ public class ApplicationStarterTest {
     @Test
     public void quandoAplicacaoInicializarDadosDoArquivoJsonDevemSerCarregadosParaOMongoDB() throws Exception {
         assertThat(campanhaRepository.findAll())
-                .as("Quando a aplicação e inicializada devem ser carregados dados do arquivo data.json para " +
+                .as("Quando a aplicação é inicializada os dados do arquivo data.json devem ser carregados para " +
                                "o MongoDB em memória")
                 .isNotNull()
                 .isNotEmpty()
                 .as("Devem haver dois(2) registros no MongoDB")
                 .hasSize(2)
-                .as("Todos os campos devem ser preenchidos e estarem com os dados corretos")
+                .as("Todos os campos devem ser preenchidos e os dados devem estar corretos")
                 .extracting("nome", "timeCoracaoId", "inicioVigencia", "fimVigencia")
                 .contains(tuple("Campanha 1", "TIME-1001", LocalDate.of(2017,10,01), LocalDate.of(2017,10,03) ),
                         tuple("Campanha 2", "TIME-1002", LocalDate.of(2017,10,01), LocalDate.of(2017,10,02)));

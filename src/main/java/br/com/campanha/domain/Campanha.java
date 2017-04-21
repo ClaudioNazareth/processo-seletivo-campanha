@@ -1,5 +1,6 @@
 package br.com.campanha.domain;
 
+import br.com.campanha.api.domain.CampanhaResource;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -49,7 +50,21 @@ public class Campanha {
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate fimVigencia;
 
+    public Campanha(String nome, String timeCoracaoId, LocalDate inicioVigencia, LocalDate fimVigencia) {
+        this.nome = nome;
+        this.timeCoracaoId = timeCoracaoId;
+        this.inicioVigencia = inicioVigencia;
+        this.fimVigencia = fimVigencia;
+    }
+
     public Campanha() {
+    }
+
+    public void atualizarDados(CampanhaResource campanhaResource){
+        setNome(campanhaResource.getNome());
+        setTimeCoracaoId(campanhaResource.getTimeCoracaoId());
+        setInicioVigencia(campanhaResource.getInicioVigencia());
+        setFimVigencia(campanhaResource.getFimVigencia());
     }
 
     public String getId() {
