@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.google.common.base.MoreObjects;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.hateoas.ResourceSupport;
@@ -16,7 +17,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
-@ApiModel(value="CampanhaResource", description="Representa os dados da camapnha que devem ser Recebidos e retornados pela API Rest")
+@ApiModel(value="CampanhaResource", description="Representa os dados da CSampanha que devem ser recebidos e retornados pela API Rest de Campanha")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CampanhaResource extends ResourceSupport {
 
@@ -29,13 +30,11 @@ public class CampanhaResource extends ResourceSupport {
     @ApiModelProperty(value = "Id do time do coração", dataType = "string", required = true)
     private String timeCoracaoId;
 
-
-    @NotNull(message="O inicio da vigencia é obrigatório!")
+    @NotNull(message="O inicio da vigência é obrigatório!")
     @JsonSerialize(using = ToStringSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @ApiModelProperty(value = "Data de inicio de vigência", dataType = "date", required = true)
     private LocalDate inicioVigencia;
-
 
     @NotNull(message="O fim vigencia é obrigatório!")
     @JsonSerialize(using = ToStringSerializer.class)
@@ -63,8 +62,6 @@ public class CampanhaResource extends ResourceSupport {
         this.inicioVigencia = inicioVigencia;
         this.fimVigencia = fimVigencia;
     }
-
-
 
     public String getNome() {
         return nome;
@@ -100,5 +97,15 @@ public class CampanhaResource extends ResourceSupport {
 
     public String getChave() {
         return chave;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("nome", nome)
+                .add("timeCoracaoId", timeCoracaoId)
+                .add("inicioVigencia", inicioVigencia)
+                .add("fimVigencia", fimVigencia)
+                .toString();
     }
 }

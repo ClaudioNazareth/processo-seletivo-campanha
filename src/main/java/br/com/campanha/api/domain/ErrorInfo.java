@@ -1,5 +1,6 @@
 package br.com.campanha.api.domain;
 
+import com.google.common.base.MoreObjects;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -19,10 +20,9 @@ public class ErrorInfo {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("ErrorInfo{");
-            sb.append("url='").append(url).append('\'');
-            sb.append(", ex='").append(ex).append('\'');
-            sb.append('}');
-        return sb.toString();
+        return MoreObjects.toStringHelper(this)
+                .add("url", url)
+                .add("ex", ex)
+                .toString();
     }
 }

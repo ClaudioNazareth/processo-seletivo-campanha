@@ -3,6 +3,7 @@ package br.com.campanha.api.rest;
 import br.com.campanha.api.domain.CampanhaResource;
 import br.com.campanha.api.domain.ErrorInfo;
 import br.com.campanha.domain.Campanha;
+import br.com.campanha.exception.RecursoNaoEncontradoException;
 import br.com.campanha.service.CampanhaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,7 +12,6 @@ import io.swagger.annotations.ApiResponses;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +37,7 @@ import static org.springframework.http.ResponseEntity.created;
 @RestController
 @RequestMapping("/v1/campanhas")
 @Api(value = "Campanha", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE,
-tags = {"Campanhas API"}, description = "Lida com todas as requisções de campanha", basePath = "/api/v1/campanhas")
+tags = {"Endpoints da Campanha"}, description = "Lida com todas as requisções de campanha", basePath = "/api/v1/campanhas")
 public class CampanhaController {
 
     private static final Logger logger = LoggerFactory.getLogger(CampanhaController.class);
@@ -71,6 +71,14 @@ public class CampanhaController {
     }
 
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
+    @ApiOperation(value = "Busca todos as Campanhas ativas",
+            notes = "Para retornar as Campanhas ativas é usado a data atual",
+            response = CampanhaResource.class,
+            responseContainer = "List")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400 , message = "Bad Request"),
+            @ApiResponse(code = 500 , message = "Internal Server Error")})
     public ResponseEntity<List<CampanhaResource>> buscarTodasCampanhas(){
 
         List<CampanhaResource> campanhaResources = campanhaService.buscarTodasAsCampanhasAtivas(LocalDate.now()).stream()
@@ -81,10 +89,21 @@ public class CampanhaController {
             campanhaResource.add(linkTo(methodOn(CampanhaController.class).buscarPorId(campanhaResource.getChave())).withSelfRel());
         });
 
+        if(logger.isDebugEnabled()) {
+            logger.debug("Quantidade de campanhas retornadas : {} ", campanhaResources.size());
+        }
+
         return new ResponseEntity<>(campanhaResources, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @ApiOperation(value = "Busca campanha por id",
+            notes = "Retorna a Campanha por ID idependente da data de vigência",
+            response = CampanhaResource.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400 , message = "Bad Request"),
+            @ApiResponse(code = 500 , message = "Internal Server Error")})
     public ResponseEntity<CampanhaResource> buscarPorId(@PathVariable String id){
         Optional<Campanha> campanhaOptional = campanhaService.buscarPorId(id);
 
@@ -94,29 +113,55 @@ public class CampanhaController {
             return new ResponseEntity<>(campanhaResource, HttpStatus.OK);
         }
 
-        //TODO - LANÇAR EXPETION
-        return null;
+        if(logger.isDebugEnabled()) {
+            logger.debug("A campanha com ID: {} não foi encontrada", id);
+        }
+
+        throw new RecursoNaoEncontradoException();
     }
 
     @DeleteMapping(value = "/{id}")
+    @ApiOperation(value = "Deleta a Campanha por id",
+            notes = "Deleta a Campanha por ID idependente da data de vigência",
+            response = ResponseEntity.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 204, message = "No Content"),
+            @ApiResponse(code = 400 , message = "Bad Request"),
+            @ApiResponse(code = 500 , message = "Internal Server Error")})
     public ResponseEntity<?> deletarPorId(@PathVariable String id){
+
+        if(logger.isDebugEnabled()) {
+            logger.debug("Deletando a campanha com ID: {}", id);
+        }
         campanhaService.deletarPorId(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PutMapping(value = "/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE },
-            produces = { MediaType.APPLICATION_JSON_VALUE })
+    @PutMapping(value = "/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE })
+    @ApiOperation(value = "Atualiza a Campanha por id",
+            notes = "Atualiza a Campanha por ID idependente da data de vigência",
+            response = ResponseEntity.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 204, message = "No Content"),
+            @ApiResponse(code = 400 , message = "Bad Request"),
+            @ApiResponse(code = 500 , message = "Internal Server Error")})
     public ResponseEntity<?> atualizarCampanha(@PathVariable String id , @Valid @RequestBody CampanhaResource campanhaResource){
+
         Optional<Campanha> campanhaOptional = campanhaService.buscarPorId(id);
+
         campanhaOptional.ifPresent(campanha -> {
+            if(logger.isDebugEnabled()) {
+                logger.debug("Atualizando a Campanha : {}", campanha);
+            }
             campanha.atualizarDados(campanhaResource);
             campanhaService.salvarCampanha(campanha);
         });
+
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     /*
-     * Os métodos abaixo capturam a  execção e retornam o Status e messagem de erro de acordo com o tipo de Exception
+     * Os métodos abaixo capturam a eexecção e retornam o Status e messagem de erro de acordo com o tipo de Exception
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
@@ -150,9 +195,9 @@ public class CampanhaController {
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(ResourceNotFoundException.class)
+    @ExceptionHandler(RecursoNaoEncontradoException.class)
     @ResponseBody ErrorInfo
-    handleNotFoundException( ResourceNotFoundException ex) {
+    handleNotFoundException( RecursoNaoEncontradoException ex) {
         return new ErrorInfo(ServletUriComponentsBuilder.fromCurrentRequest().path("").toUriString() ,ex);
     }
 

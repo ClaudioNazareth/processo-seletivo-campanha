@@ -1,4 +1,5 @@
 # Projeto Cadastro de Campanhas
+- _Informaçães técnicas sobre o projeto estão após a descrição_
 
 Eu, como usuário, quero administrar os dados da Campanha e fornecer mecanismos (APIs) para **INCLUIR, CONSULTAR, ATUALIZAR, DELETAR** 
 as campanhas. Para tanto, os critérios de aceite dessa história são:
@@ -43,95 +44,56 @@ Incluindo campanha 3 : 01/10/2017 a 03/10/2017
 
 **No caso de uma nas campanhas já existentes, o sistema deverá ser capas de fornecer recursos para avisar outros sistemas que houve alteração nas campanhas existentes.**
 
+## Informações sobre o projeto
 
-## Informações
+- O caminho base para as os endpoins é : /api/v1
 
 - Porta da aplicação :8080
+
 - Para iniciar a aplicação execute : --> gradle bootRun 
-- Para ver a documentação das APIS rest veja --> /documentation/index.html
-- Para log favor consultar o arquivo camapanha.log criado na raiz da aplicaçao
+
+- Para ver a documentação das APIS inclusive os exemplos usando curl veja --> /documentacao/index.html (ex: http://localhost:8080/documentacao/index.html )
+    -  Para documentar a API usei o swagger caso não conheça o Swagger veja : --> http://swagger.io/ 
+    
+- A aplicação contém um banco de dados MongoDB imbutido que é inicializado junto com aplicação    
+- Para log veja o arquivo camapanha.log criado na raiz da aplicação.
+
+- Para os recursos expostos eu usei os seguinte:
+    - 200 OK - para GET requests.
+    - 201 Created - para POST.
+    - 204 No Content - para PUT, PATCH, e DELETE requests.
+    - Usei alguns principios de HETEOAS para a API, no qual cara recurso tem o self link e para criação de recursos 
+      retorno o link para o recurso criado.
+
 - Java code coverage : 
 
-## Technologies and frameworks used and reasons
+## Tecnologias e frameworks utilizados
 
-**For creating the Project I use:**
+- **Java versão 8** - 
 
-- **Gradle** - _A build system that is a quantum leap for build technology in the Java (JVM) world. Gradle provides:_
-    - A very flexible general purpose build tool like Ant.
-    - Switchable, build-by-convention frameworks a la Maven. But we never lock you in!
-    - Very powerful dependency management (based on Apache Ivy).
-    - Groovy build scripts.
-    - A rich domain model for describing your build.              
+- **Gradle** - _Para construção do projeto e gerenciamento de frameworks_
 
+- **Spring boot** - _Padrão para construção de projetos usando Spring_
 
-- **Spring boot** - _Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can
- “just run”. We take an opinionated view of the Spring platform and third-party libraries so you can get started with minimum fuss. Most Spring Boot applications need very little Spring configuration_.
-    - Provide a radically faster and widely accessible getting started experience for all Spring development.
-    - Be opinionated out of the box, but get out of the way quickly as requirements start to diverge from the defaults.
-    - Provide a range of non-functional features that are common to large classes of projects (e.g. embedded servers, security,
-      metrics, health checks, externalized configuration).
-    - Absolutely no code generation and no requirement for XML configuration.
-
-**For creating products I use:**
- - **MongoDB | Spring Data Mongo | Spring Data Rest** 
- 
- - **Spring Data Rest** - _Spring Data REST builds on top of Spring Data repositories and automatically exports those as REST resources. It leverages hypermedia to allow clients to find functionality exposed by the repositories and integrates these resources into related hypermedia based functionality automatically._
-
-## Default status codes
-
-For the resources exposed(Product), I use set of default status codes:
-
-- 200 OK - for plain GET requests.
-
-- 201 Created - for POST and PUT requests that create new resources.
-
-- 204 No Content - for PUT, PATCH, and DELETE requests if the configuration is set to not return response bodies for resource updates (RepositoryRestConfiguration.returnBodyOnUpdate). If the configuration value is set to include responses for PUT, 200 OK will be returned for updates, 201 Created will be returned for resource created through PUT.
-
-##Resource discoverability
-- A core principle of HATEOAS is that resources should be discoverable through the publication of
-links that point to the available resources. There are a few competing de-facto standards of how 
-to represent links in JSON. By default, **Spring Data REST** uses **HAL** to render responses. HAL defines 
-links to be contained in a property of the returned document.
-
-- Resource discovery starts at the top level of the application. By issuing a request to the root 
-URL under which the Spring Data REST application is deployed, the client can extract a set of 
-links from the returned JSON object that represent the next level of resources that are available
-to the client.
-
-For example, to discover what resources are available at the root of the application, issue an HTTP GET to the root URL:
-
-curl -v http://localhost:8080/api  
-```
-< HTTP/1.1 200 OK
-< Content-Type: application/hal+json
-```
-
-```
-{
-  "_links": {
-    "products": {
-      "href": "http://localhost:8080/api/products{?page,size,sort}",
-      "templated": true
-    },
-    "profile": {
-      "href": "http://localhost:8080/api/profile"
-    }
-  }
-}
-```
-
+- **Spring HATEOAS** - _Spring HATEOAS fornece algumas APIs para facilitar a criação de representações REST que seguem 
+    o princípio HATEOAS quando se trabalha com Spring e especialmente Spring MVC. O problema central que ele tenta 
+    abordar é a criação de links e a montagem de representações._ 
     
-- **MongoDB** - _MongoDB is an open-source document database that provides high performance, high availability, and automatic scaling. A record in MongoDB is a document, which is a data structure composed of field and value pairs.
- MongoDB documents are similar to JSON objects. The values of fields may include other documents, arrays, and arrays of documents. _
-    - Documents (i.e. objects) correspond to native data types in many programming languages.
-    - Embedded documents and arrays reduce need for expensive joins.
-    - Dynamic schema supports fluent polymorphism. 
- 
+- **MongoDB** - _O MongoDB é um banco de dados de documentos de código aberto que fornece alto desempenho, alta disponibilidade 
+  e dimensionamento automático. Um registro no MongoDB é um documento, que é uma estrutura de dados composta de pares de campo e valor.
+ Os documentos MongoDB são semelhantes aos objetos JSON._ 
 
-- **Swagger** - _Swagger is a powerful open source framework backed by a large ecosystem of tools that helps you design,
- build, document, and consume your RESTful APIs._
+- **Swagger** - _Swagger é uma poderoso framework de código aberto apoiada por um grande ecossistema de ferramentas que para projetar,
+ Compilar, documentar e consumir as APIs RESTful._
+
+- **AssertJ** - _O AssertJ core é uma biblioteca Java que fornece uma interface fluente para escrever asserções. Seu principal objetivo é
+Para melhorar a legibilidade do código de teste e facilitar a manutenção dos testes._
+
+- **Spring Data MONGO** - _Spring Data MONGO: Tecnologia responsável por gerar boa parte do código relacionado a camada de persistência
+e mapeamnto Documento(MongoDb) - Classe Java._ 
+
+- **Spring Web MVC** - _Framework web usado como solução para a definição de componentes seguindo o modelo arquitetural REST._ 
+
+- **Jackson** - _API para conversão de dados Java em Json e vice-versa._ 
 
 
-- **AssertJ** - _AssertJ core is a Java library that provides a fluent interface for writing assertions. Its main goal is 
-to improve test code readability and make maintenance of tests easier._
-  

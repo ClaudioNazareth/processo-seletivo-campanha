@@ -22,6 +22,16 @@ public class CampanhaGenerator {
         return campanhas;
     }
 
+    public static List<Campanha> getCampanhasAtivas(){
+        List<Campanha> campanhas = new ArrayList();
+        campanhas.add(new Campanha("Campanha 10",  "TIME-1001",
+                LocalDate.now(), LocalDate.now().plusDays(3)));
+
+        campanhas.add(new Campanha("Campanha 20",  "TIME-1001",
+                LocalDate.now(), LocalDate.now().plusDays(5)));
+        return campanhas;
+    }
+
     public static CampanhaResource criarCampanhaVigencia10Resource(){
         return new CampanhaResource("Campanha 4",  "TIME-1004",
                 LocalDate.of(2017,10,10),LocalDate.of(2017,10,20));
