@@ -1,0 +1,21 @@
+************************************************************************************************************************
+Juntamente com o Código, deve-se documentar a estratégia utilizada para a criação da aplicação, a arquitetura utilizada
+e os padrões. A documentação pode ser feita via GIT/Bitbucket;
+
+Para criar a aplicação foi implementado o serviço Rest para o CRUD de Campanhas
+
+ Para tal Foram criadas 2 Entidades Campanha e CampanhaResource:
+ - A entidade Campanha faz a modelagem Java - MongoDB
+ - A entidade CampanhaResource faz é entidade que vai ser Serializada para ser recebida e entregue pelas interfaces da
+   API em Formato Json. Tente a ser mais Leve e com anotações para documentação swagger
+
+ O serviço de Criação de Campanhas é acionado pelo método POST em /api/v1/campanhas , algumas informações sobre:
+ - O conteúdo trafegado entre o cliente e o serviço suporta o formato application/json.
+ - Recebe um um Json com os seguintes campos (nome, timeCoracaoId, inicioVigencia e fimVigencia)
+ - OS campos de Data devem ter o seguinte formato : "YYYY-MM-DD"
+
+ Componentes:
+
+
+
+************************************************************************************************************************
