@@ -46,7 +46,8 @@ Incluindo campanha 3 : 01/10/2017 a 03/10/2017
 
 ## Informações sobre o projeto
 
-- O caminho base para as os endpoins é : /api/v1
+- O caminho **base** para as os endpoins é : /api/v1
+  - Para esta aplicação temos :  /api/v1/campanhas e /api/v1/webhook
 
 - Porta da aplicação :8080
 
