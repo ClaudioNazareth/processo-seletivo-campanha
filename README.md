@@ -57,16 +57,16 @@ Incluindo campanha 3 : 01/10/2017 a 03/10/2017
     -  Para documentar a API usei o swagger caso não conheça o Swagger veja : --> http://swagger.io/ 
     
 - A aplicação contém um banco de dados MongoDB imbutido que é inicializado junto com aplicação    
-- Para log veja o arquivo camapanha.log criado na raiz da aplicação.
+- Para log veja o arquivo campanha.log criado na raiz da aplicação.
 
 - Para os recursos expostos eu usei os seguinte:
     - 200 OK - para GET requests.
     - 201 Created - para POST.
     - 204 No Content - para PUT, PATCH, e DELETE requests.
     - Usei alguns principios de HETEOAS para a API na qual cada recurso tem o **self link** e para criação de novos recursos 
-      é retornado o link para o recurso criado.
+      é retornado **no header o link para o recurso criado**.
 
-- Java code coverage : 100 % nos pacotes de Rest Controller, Domain e Service  
+- Java code coverage : **100 % nos pacotes de Rest Controller, Domain e Service**  
                      : 75% das classes | 74% dos Metodos e 74% das linhas de código       
 
 ## Tecnologias e frameworks utilizados
