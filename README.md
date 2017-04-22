@@ -85,14 +85,14 @@ Incluindo campanha 3 : 01/10/2017 a 03/10/2017
   e dimensionamento automático. Um registro no MongoDB é um documento, que é uma estrutura de dados composta de pares de campo e valor.
  Os documentos MongoDB são semelhantes aos objetos JSON._ 
 
-- **Swagger** - _Swagger é uma poderoso framework de código aberto apoiada por um grande ecossistema de ferramentas que para projetar,
+- **Swagger** - _Swagger é uma poderoso framework de código aberto apoiada por um grande ecossistema de ferramentas para projetar,
  Compilar, documentar e consumir as APIs RESTful._
 
 - **AssertJ** - _O AssertJ core é uma biblioteca Java que fornece uma interface fluente para escrever asserções. Seu principal objetivo é
 Para melhorar a legibilidade do código de teste e facilitar a manutenção dos testes._
 
 - **Spring Data MONGO** - _Spring Data MONGO: Tecnologia responsável por gerar boa parte do código relacionado a camada de persistência
-e mapeamnto Documento(MongoDb) - Classe Java._ 
+e mapeamnto Documento(MongoDb) com a classe Java , assim como algumas interfaces básicas para CRUD dos documentos._ 
 
 - **Spring Web MVC** - _Framework web usado como solução para a definição de componentes seguindo o modelo arquitetural REST._ 
 
