@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by rick on 21/04/17.
+ * Classe para criar dados de teste
+ *
+ * @author : Claudio Nazareth  chtnazareth@gmail.com
  */
 public class CampanhaGenerator {
 
