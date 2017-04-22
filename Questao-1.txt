@@ -67,30 +67,28 @@ br.com.campanha.repository - Pacote para as classes de Repository (Acesso ao ban
 
 br.com.campanha.service - Pacote para as classes de serviço da aplicação
  - CampanhaService - Interface Encapsula as operaçeõs de CRUD e Regras de Campanha
-   -impl
-    - CampanhaServiceImpl - Implementação da interface
+  -impl
+   - CampanhaServiceImpl - Implementação da interface
 
 br.com.campanha.webhook - Pacote para configuração do webhook para avisar APIS sobre atualização do Status
 
-------->>>>    Testes  e Regras:
+------->>>> Testes  e Regras:
 
 test/br.com.campanha - ApplicationStarterTest - Valida se a inicialização da applicação carrega os dados
 
 test/br.com.campanha.repository - Validação dos repositórios
-     * Testa o requisito 1 -  O Sistema não deverá retornar campanhas que estão com a data de vigência vencidas
+ * Testa o requisito 1 -  O Sistema não deverá retornar campanhas que estão com a data de vigência vencidas
  - CampanhaRepositoryTest.deveTrazerCampanhasComDataDeFimVigenciaoSuperiorADataDoParametro()
                          .naoDeveTrazerCampanhasComDataDeFimVigenciaoInferiorADataDoParametro()
 
-
-    * Faz parte o requisito 2 - trazer as campanhas ativas no período
+ * Faz parte o requisito 2 - trazer as campanhas ativas no período
  - CampanhaRepositoryTest.deveTrazerCampanhasAtivasPorPeriodo()
                          .naoDeveTrazerCampanhasQuandoPeriodoEstiverForaDosParametros()
 
 test/br.com.campanha.service - Pacote para teste dos serviços
-
-     * Testa o requisito 2 -
-     * caso exista uma campanha ou N campanhas associadas naquele período, o sistema deverá somar um dia no término da vigência de cada campanha já existente.*
-     * Caso a data final da vigência seja igual a outra campanha, deverá ser acrescido um dia a mais de forma que as campanhas não tenham a mesma data de término de vigência.
+ * Testa o requisito 2 -
+ * caso exista uma campanha ou N campanhas associadas naquele período, o sistema deverá somar um dia no término da vigência de cada campanha já existente.*
+ * Caso a data final da vigência seja igual a outra campanha, deverá ser acrescido um dia a mais de forma que as campanhas não tenham a mesma data de término de vigência.
   - CampanhaServiceTest.campanhaDeveSerCadastradasComDadosCorretos()
                        .buscarCampanhasAtivasPorPeriodo()
 
