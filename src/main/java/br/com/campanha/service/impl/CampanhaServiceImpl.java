@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
@@ -22,7 +21,6 @@ import java.util.Optional;
  */
 @Service
 @Validated
-@Transactional(rollbackFor=Exception.class)
 public class CampanhaServiceImpl implements CampanhaService {
 
     private static final Logger logger = LoggerFactory.getLogger(CampanhaService.class);

@@ -105,7 +105,6 @@ public class CampanhaControllerTest {
                 .as("Os dados da campanha devem ser atualizados")
                 .extracting("nome", "timeCoracaoId", "inicioVigencia", "fimVigencia")
                 .contains("Campanha 4", "TIME-1004", LocalDate.of(2017,10,10),LocalDate.of(2017,10,20));
-
     }
 
 
