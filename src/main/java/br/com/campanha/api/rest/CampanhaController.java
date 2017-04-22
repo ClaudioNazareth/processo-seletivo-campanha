@@ -33,6 +33,7 @@ import static org.springframework.http.ResponseEntity.created;
 
 /**
  *  Para documentação das apis favor ver /documentacao/index.html (swegger ui)
+ *  @author : Claudio Nazareth  chtnazareth@gmail.com
  */
 @RestController
 @RequestMapping("/v1/campanhas")

@@ -1,6 +1,5 @@
 package br.com.campanha.api.domain;
 
-
 import br.com.campanha.domain.Campanha;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -17,6 +16,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
+/**
+ * Representa os dados da CSampanha que devem ser recebidos e retornados pela API Rest de Campanha
+ * @author : Claudio Nazareth  chtnazareth@gmail.com
+ */
 @ApiModel(value="CampanhaResource", description="Representa os dados da CSampanha que devem ser recebidos e retornados pela API Rest de Campanha")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CampanhaResource extends ResourceSupport {
