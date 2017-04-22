@@ -1,10 +1,70 @@
 ************************************************************************************************************************
+Uma das grandes inclusões no Java 8 foi a API Stream. Com ela podemos fazer diversas operações de loop, filtros, maps,
+etc. Porém, existe uma variação bem interessante do Stream que é ParallelStreams. Descreva com suas palavras quando qual
+é a diferença entre os dois e quando devemos utilizar cada um deles.
+************************************************************************************************************************
 
-Detalhamento da Questão 1
+O prórpio Strem do java já foi breviamente explicado na pergunta, ele oferece diversas operações de loop, filtros, maps,
+etc. A idéia do ParallelStreams é que ele permite de forma "automática" a paralelização do processo! O ponto interessante
+aqui é entender o que é paralelização de processo e processamento concorrente!
+ - Processamento em paralelo é executar ao mesmo tempo tarefas que não entram no estado de blocl/aguardando (como foi
+ explicado na questão 4 de Threads e Deadlocks), como por exemplos terefas de cálculos intensos.
+ - Já o processamento concorrente grante parte das terefas alternam para o estado de block/ aguarando o liberação de
+ algum recurso ou aguardando  o retorno de algum recurso. Otimizando assim o uso do processador.
+
+ O ParallelStreams do java independentemente do tipo de tarefa que for paralelizar, ele vai usar sempre a mesma estratégia.
+ Isto pode levar ae 3 situações:
+    - Ganho de tempo no processamento
+    - Não haver nenhum ganho no tempo de processamento.
+    - Levar a um aumento no tempo de processamento.
+
+A paralelização automática geralmente não leva aos resultados esperados por algumas razões:
+
+    - O aumento da velocidade é altamente dependente do tipo de tarefa e da estratégia de paralelização.
+      E sobre tudo, a melhor estratégia de paralelização depende do tipo de tarefa.
+
+    - O aumento da velocidade em altamente dependente do ambiente. Em alguns ambientes, é fácil obter uma diminuição
+      da velocidade paralelizando.
+
+    - Em alguns cenários, dado a diferença de ambientes o parallelismo mostra ganhas de desempenho no ambiente de desenvolvimento
+      mas piora a performance nos ambientes de produção
+
+Para realmente haver um ganho no processamento paralelizando, o ideial é que criemos uma estratégias para cada tipo de tarefa
+o que tiraria toda a "graça" em usar o ParallStream se assim podemos dizer. A paralelização requere:
+
+    - Um "pool" de Threads para executar as sub-tasks.
+    - Dividir o tarefa inicial em sub-tasks
+    - Distribuir as sub-taks para as threads
+    - Coletar os resultados
+
+ Dado tudo isto e após ler um artigo falando sobre como o o algoritimo do ParallelStream do java é problemático
+       --> http://www.coopsoft.com/ar/CalamityArticle.html e http://www.coopsoft.com/ar/Calamity2Article.html
+
+ ***** Eu recomendária o uso do ParallelStrem em casos:
+  - Ambiente com com vários processadores(Padrão atualmente) no qual:
+  - Algumas threads ficaram em blockd por um longo periodo(como acessando outro servidor)
+  - Na qual não tenha um grande numero de threads executando ao mesmo tempo e principalmente não tenha outros stream
+    em paralelo executando ao mesmo tempo, mas uma camada de paralelismo não ajudaria em nada.
+  - A lista de objetos na qual esta processando em paralalelo seja imutável como por exemplos variávies numéricas que serão
+    utilizadas em cálculos.
+
+
+Para os outros cenários eu recomendaria o uso do Stream sem o paralelismo.
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+************************************************************************************************************************
 
 
 
