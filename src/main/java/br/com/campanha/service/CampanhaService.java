@@ -25,4 +25,7 @@ public interface CampanhaService {
     void deletarPorId(String id);
 
     void salvarCampanha(Campanha campanha);
+
+    List<Campanha> buscaPorTimeDoCoracao(String timeDoCoracao);
+
 }

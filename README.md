@@ -57,6 +57,7 @@ Incluindo campanha 3 : 01/10/2017 a 03/10/2017
     -  Para documentar a API usei o swagger caso não conheça o Swagger veja : --> http://swagger.io/ 
     
 - A aplicação contém um banco de dados MongoDB imbutido que é inicializado junto com aplicação    
+    - Porta para acessar o MongoDB: **54321**
 - Para log veja o arquivo campanha.log criado na raiz da aplicação.
 
 - Para os recursos expostos eu usei os seguinte:

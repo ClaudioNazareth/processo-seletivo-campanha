@@ -72,6 +72,11 @@ public class CampanhaServiceImpl implements CampanhaService {
         campanhaRepository.save(campanha);
     }
 
+    @Override
+    public List<Campanha> buscaPorTimeDoCoracao(String timeDoCoracao) {
+        return campanhaRepository.findByTimeCoracaoIdIgnoreCase(timeDoCoracao);
+    }
+
     /**
      *
      * @param campanha - Campanha que vai ser comparadas com as outras campaanhas para validar a necessidade de se adicionar mais um dia

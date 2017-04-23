@@ -106,4 +106,11 @@ public class CampanhaRepositoryTest {
                 .as("Não existe nenhuma campanha vigênte neste período")
                 .isEmpty();
     }
+
+    @Test
+    public void findByTimeCoracaoIdIgnoreCaseTest() throws Exception {
+        assertThat(campanhaRepository.findByTimeCoracaoIdIgnoreCase("TIME-1001"))
+                .as("Deve encontrar uma Campanha com o Time TIME-1001")
+                .hasSize(1);
+    }
 }

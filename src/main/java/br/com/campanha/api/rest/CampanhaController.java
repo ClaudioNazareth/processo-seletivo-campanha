@@ -121,6 +121,31 @@ public class CampanhaController {
         throw new RecursoNaoEncontradoException();
     }
 
+
+    @GetMapping(value = "/time-coracao/{timeCoracao}", produces = { MediaType.APPLICATION_JSON_VALUE })
+    @ApiOperation(value = "Busca campanha por Time do Coração",
+            notes = "Retorna a Campanha por Time do Coração idependente da data de vigência",
+            response = CampanhaResource.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "OK"),
+            @ApiResponse(code = 400 , message = "Bad Request"),
+            @ApiResponse(code = 500 , message = "Internal Server Error")})
+    public ResponseEntity<List<CampanhaResource>> buscaPorTimeDoCoracao(@PathVariable String timeCoracao){
+        List<CampanhaResource> campanhaResources = campanhaService.buscaPorTimeDoCoracao(timeCoracao).stream()
+                .map(CampanhaResource::new)
+                .collect(Collectors.toList());
+
+        campanhaResources.forEach(campanhaResource -> {
+            campanhaResource.add(linkTo(methodOn(CampanhaController.class).buscarPorId(campanhaResource.getChave())).withSelfRel());
+        });
+
+        if(logger.isDebugEnabled()) {
+            logger.debug("Quantidade de campanhas retornadas : {} ", campanhaResources.size());
+        }
+
+        return new ResponseEntity<>(campanhaResources, HttpStatus.OK);
+    }
+
     @DeleteMapping(value = "/{id}")
     @ApiOperation(value = "Deleta a Campanha por id",
             notes = "Deleta a Campanha por ID idependente da data de vigência",

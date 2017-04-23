@@ -115,4 +115,14 @@ public class CampanhaControllerTest {
                 .withNoCause();
     }
 
+    @Test
+    public void deveEncontrarCampanhaPorTimeDoCoracao() throws Exception{
+        final ResponseEntity<List<CampanhaResource>> responseEntity = campanhaController.buscaPorTimeDoCoracao("TIME-1001");
+
+        assertThat(responseEntity.getStatusCode()).as("O Status code deve ser OK").isEqualTo(HttpStatus.OK);
+
+        assertThat(responseEntity.getBody()).as("Deve retornar a Listas de Campanhas")
+                .hasSize(1);
+    }
+
 }
