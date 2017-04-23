@@ -10,15 +10,15 @@ JSON) com os com o Formato Json que será trafegado nas APIS.
 Também optei por utilizar Spring Data Mongo por abstrair e facilitar toda a parte dos Repositórios e servir como ponto de
 partida para os comandos de CRUD de persistencia de dados. Já ofere algumas interfaces basicas como as de busca e inserção.
 
-Para cirar os serviços REST optei pelo Spring Rest pela facilidade e integração com Spring boot ao invés de utilizar
+Para criar os serviços REST optei pelo Spring Rest pela facilidade e integração com Spring boot ao invés de utilizar
 o JAX-RS com JERSEY.
 
 Para criar a aplicação foi implementado os serviço Rest para o CRUD de Campanhas
 
  Para tal Foram criadas 2 Entidades Campanha e CampanhaResource:
  - A entidade Campanha faz a modelagem Java - MongoDB
- - A entidade CampanhaResource faz é entidade que vai ser Serializada para ser recebida e entregue pelas interfaces da
-   API em Formato Json. Tente a ser mais Leve e com anotações para documentação swagger
+ - A entidade CampanhaResource é a entidade que vai ser Serializada para ser recebida e entregue pelas interfaces da
+   API em Formato Json. Tende a ser mais Leve e com anotações para documentação Swagger
 
  O serviço de criação de Campanhas é acionado pelo método POST em /api/v1/campanhas , algumas informações sobre:
  - O conteúdo trafegado entre o cliente e o serviço suporta o formato application/json.
@@ -66,7 +66,7 @@ br.com.campanha.repository - Pacote para as classes de Repository (Acesso ao ban
  - CampanhaRepository - Interface que implementa o Spring Data Mongo para acesso ao MongoDB - Operações de CRUD
 
 br.com.campanha.service - Pacote para as classes de serviço da aplicação
- - CampanhaService - Interface Encapsula as operaçeõs de CRUD e Regras de Campanha
+ - CampanhaService - Interface para encapsular as operaçoes de CRUD e Regras de Campanha
   -impl
    - CampanhaServiceImpl - Implementação da interface
 
