@@ -19,7 +19,6 @@ import java.util.Objects;
  * Entidade representa os dados da base de Campanhas.
  * @author : Claudio Nazareth  chtnazareth@gmail.com
  */
-
 @Document
 public class Campanha {
 

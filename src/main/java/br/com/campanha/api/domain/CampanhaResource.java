@@ -17,7 +17,7 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 /**
- * Representa os dados da CSampanha que devem ser recebidos e retornados pela API Rest de Campanha
+ * Representa os dados da Campanha que devem ser recebidos e retornados pela API Rest de Campanha
  * @author : Claudio Nazareth  chtnazareth@gmail.com
  */
 @ApiModel(value="CampanhaResource", description="Representa os dados da CSampanha que devem ser recebidos e retornados pela API Rest de Campanha")

@@ -1,17 +1,22 @@
 ************************************************************************************************************************
 Juntamente com o Código, deve-se documentar a estratégia utilizada para a criação da aplicação, a arquitetura utilizada
 e os padrões. A documentação pode ser feita via GIT/Bitbucket;
+************************************************************************************************************************
 
-Para o projeto optei por utilizar Spring Boot no qual se tornou o padrão de facto para projetos Java, pelas facilidas e
+Para o projeto optei por utilizar Spring Boot no qual se tornou o padrão de facto para projetos Java, pelas facilidas,
 integrações oferecidas e pelo fato de vir com Tomcat embarcado.
 
 Para persistencia optei por utilizar como banco de dados o MongoDB pela flexibilidade , desempenho e similidade(BSON -
-JSON) com os com o Formato Json que será trafegado nas APIS.
-Também optei por utilizar Spring Data Mongo por abstrair e facilitar toda a parte dos Repositórios e servir como ponto de
-partida para os comandos de CRUD de persistencia de dados. Já ofere algumas interfaces basicas como as de busca e inserção.
+JSON) com o Formato Json que será trafegado nas APIS.
+
+Também optei por utilizar Spring Data Mongo por abstrair e facilitar toda a parte dos repositórios e servir como ponto de
+partida para os comandos de CRUD de persistencia de dados. Já que ele ofere algumas interfaces basicas como as de busca
+e inserção.
 
 Para criar os serviços REST optei pelo Spring Rest pela facilidade e integração com Spring boot ao invés de utilizar
 o JAX-RS com JERSEY.
+
+Utilizei o Spring Cloud Feng para consumir serviços REST e o Spring Clouf Hystrix como Circuit Braker!
 
 Para criar a aplicação foi implementado os serviço Rest para o CRUD de Campanhas
 
@@ -38,6 +43,15 @@ O serviço de atualizar a campanha é acionado pelo método PUT(Não foi impleme
   - O conteúdo trafegado entre o cliente e o serviço suporta o formato application/json.
   - Recebe um um Json com os seguintes campos (nome, timeCoracaoId, inicioVigencia e fimVigencia) para atualizar atualizaçaão dos campos
   - O sistema retorna o status 204 No Content;
+
+Foi criada uma estrutura de webhhok, na qual existe um endpoint para cadastros dos URLS,
+Quando for cadastrada uma nova campanha ou atualizada a estrura de webook irá notificar as APIs cadastradas pelo URL via POST
+
+ O serviço de criação de Webhook é acionado pelo método POST em /api/v1/webhooks , algumas informações sobre:
+ - O conteúdo trafegado entre o cliente e o serviço suporta o formato application/json.
+ - Recebe um um Json com os seguintes campos (url, chaveAcesso)
+ - Não pode ser cadastrado um webhook com o mesmo url de um existente
+ - Após a criação do webhook é retornado no HEADER a URI do webhook criada
 
  Documento - campanha
 

@@ -47,7 +47,7 @@ Incluindo campanha 3 : 01/10/2017 a 03/10/2017
 ## Informações sobre o projeto
 
 - O caminho **base** para as os endpoins é : /api/v1
-  - Para esta aplicação temos :  /api/v1/campanhas e /api/v1/webhook
+  - Para esta aplicação temos :  /api/v1/campanhas e /api/v1/webhooks
 
 - Porta da aplicação :8080
 
@@ -81,6 +81,12 @@ Incluindo campanha 3 : 01/10/2017 a 03/10/2017
 - **Spring HATEOAS** - _Spring HATEOAS fornece algumas APIs para facilitar a criação de representações REST que seguem 
     o princípio HATEOAS quando se trabalha com Spring e especialmente Spring MVC. O problema central que ele tenta 
     abordar é a criação de links e a montagem de representações._ 
+    
+- **Spring Cloud Feign** -  _Feign é um projeto que faz parte do grande guarda-chuvas de soluções do Spring Cloud e ele 
+   basicamente é utilizado para integração com serviços Rest._  
+
+- **Spring Cloud Hystrix** -  _O Hystrix implementa o padrão Circuit Breaker, que de forma bem rápida é um failover para
+ chamadas entre micro serviços, ou seja, caso um micro serviço estiver fora do ar um método de fallback é chamado_      
     
 - **MongoDB** - _O MongoDB é um banco de dados de documentos de código aberto que fornece alto desempenho, alta disponibilidade 
   e dimensionamento automático. Um registro no MongoDB é um documento, que é uma estrutura de dados composta de pares de campo e valor.
