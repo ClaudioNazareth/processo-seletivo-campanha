@@ -11,7 +11,7 @@ import javax.validation.constraints.Size;
 import java.util.Objects;
 
 /**
- * Entidade representa os dados da base de Webhook.
+ * Entidade representa os dados do documento MongoDB de Webhook.
  * @author : Claudio Nazareth  chtnazareth@gmail.com
  */
 @Document

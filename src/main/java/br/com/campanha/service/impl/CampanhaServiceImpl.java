@@ -25,16 +25,27 @@ public class CampanhaServiceImpl implements CampanhaService {
 
     private static final Logger logger = LoggerFactory.getLogger(CampanhaService.class);
 
-    private  final int NUMERO_DIAS = 1;
+    private static final int NUMERO_DIAS = 1;
 
     @Autowired
     private CampanhaRepository campanhaRepository;
 
+    /**
+     * Busca todas as campanhas ativas (Quando a data de fim de vigência for menor ou igual a data do parametro)
+     * @param hoje(LocalDate) - data que será usada como data de corte para buscar as campanhas ativas
+     * @return List<Campanha> - Lista de campanhas ativas
+     */
     @Override
     public List<Campanha> buscarTodasAsCampanhasAtivas(LocalDate hoje) {
         return campanhaRepository.buscarTodasAsCampanhasAtivas(hoje);
     }
 
+    /**
+     * Busca todas as campanhas cuja a vigência estiver dentro das datas passadas no parametro
+     * @param inicioVigencia - Data de inicio de vigência das campanhas a serem buscadas
+     * @param fimVigencia - Data de fim de vigência das campanhas a serem buscadas
+     * @return List<Campanha> - Lista de campanhas ativas
+     */
     @Override
     public List<Campanha> buscarCampanhasAtivasPorPeriodo(LocalDate inicioVigencia, LocalDate fimVigencia) {
         return campanhaRepository.buscarCampanhasAtivasPorPeriodo(inicioVigencia, fimVigencia);
@@ -42,8 +53,11 @@ public class CampanhaServiceImpl implements CampanhaService {
 
     @Override
     public Campanha cadastrarCampanha(String nomeDaCampanha, String idDoTimeCoracao, LocalDate inicioVigencia, LocalDate fimVigencia) {
-        logger.debug("Cadastrando Campanha com nome {} - Data de Inicio Vigência: {}  - Data de Fim Vigência : {} ",
-                nomeDaCampanha , inicioVigencia , fimVigencia);
+
+        if(logger.isDebugEnabled()) {
+            logger.debug("Cadastrando Campanha com nome {} - Data de Inicio Vigência: {}  - Data de Fim Vigência : {} ",
+                    nomeDaCampanha, inicioVigencia, fimVigencia);
+        }
 
         List<Campanha> campanhas = campanhaRepository.buscarCampanhasAtivasPorPeriodo(inicioVigencia, fimVigencia);
         Collections.sort(campanhas, Comparator.comparing(Campanha::getFimVigencia));
@@ -78,8 +92,9 @@ public class CampanhaServiceImpl implements CampanhaService {
     }
 
     /**
+     * @param campanha - Campanha que vai ser comparadas com as outras campanhas para se validar a necessidade de se
+     *                   adicionar mais um dia no final de vigência da campanha.
      *
-     * @param campanha - Campanha que vai ser comparadas com as outras campaanhas para validar a necessidade de se adicionar mais um dia
      * @param campanhasCadastradas - Listas de campanhas cadastras com vigência dentro da vigência da nova campanha a ser cadastrada
      */
     private void adicionaDiaAoFimVigenciaRecursivo(Campanha campanha, List<Campanha> campanhasCadastradas){
@@ -87,7 +102,9 @@ public class CampanhaServiceImpl implements CampanhaService {
                 .filter(campanhaCadastrada -> !campanhaCadastrada.equals(campanha))
                 .anyMatch(campanhaCadastrada -> campanhaCadastrada.getFimVigencia().isEqual(campanha.getFimVigencia()))){
 
-            logger.debug("Adcionando fim de vigência na Campanha: {}" , campanha);
+            if(logger.isDebugEnabled()) {
+                logger.debug("Adcionando fim de vigência na Campanha: {}", campanha);
+            }
             campanha.setFimVigencia(campanha.getFimVigencia().plusDays(NUMERO_DIAS));
             adicionaDiaAoFimVigenciaRecursivo(campanha, campanhasCadastradas);
         }

@@ -33,7 +33,8 @@ import static org.springframework.http.ResponseEntity.created;
 @RestController
 @RequestMapping("/v1/webhooks")
 @Api(value = "Webhook", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE,
-        tags = {"Endpoints de Webhook"}, description = "Lida com todas as requisções de Webhook", basePath = "/api/v1/webhooks")
+        tags = {"Endpoint de Webhook"}, description = "Lida com todas as requisções para o serviço Rest de Webhook",
+        basePath = "/api/v1/webhooks")
 public class WebhookController {
 
     private static final Logger logger = LoggerFactory.getLogger(WebhookController.class);
@@ -42,8 +43,9 @@ public class WebhookController {
     private WebhookService webhookService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Cria uma nova webhook com base nos parametros passados ",
-            notes = "Cria uma novo webhook para ser usado nas notificações de atualização e retorna o link do novo webhook  criada",
+    @ApiOperation(value = "Cria um novo webhook com base nos parametros passados ",
+            notes = "Cria uma novo webhook para ser usado nas notificações de atualização e retorna o link do novo " +
+                    "webhook  criada",
             response = ResponseEntity.class)
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Created"),
@@ -91,11 +93,6 @@ public class WebhookController {
         return new ErrorInfo(ServletUriComponentsBuilder.fromCurrentRequest().path("").toUriString() , ex);
     }
 
-    /**
-     * Retorna os erros de validação para o chamador
-     * @param ex
-     * @return
-     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseBody ErrorInfo
@@ -103,11 +100,6 @@ public class WebhookController {
         return new ErrorInfo(ServletUriComponentsBuilder.fromCurrentRequest().path("").toUriString() ,ex);
     }
 
-    /**
-     * Retorna os erros de validação para o chamador
-     * @param ex
-     * @return
-     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody ErrorInfo

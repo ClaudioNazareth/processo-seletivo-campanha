@@ -17,10 +17,10 @@ import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 /**
- * Representa os dados da Campanha que devem ser recebidos e retornados pela API Rest de Campanha
+ * Representa os dados da campanha que devem ser recebidos e retornados pela API Rest de campanha
  * @author : Claudio Nazareth  chtnazareth@gmail.com
  */
-@ApiModel(value="CampanhaResource", description="Representa os dados da CSampanha que devem ser recebidos e retornados pela API Rest de Campanha")
+@ApiModel(value="CampanhaResource", description="Representa os dados da campanha que devem ser recebidos e retornados pela API Rest de campanha")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CampanhaResource extends ResourceSupport {
 
@@ -29,7 +29,7 @@ public class CampanhaResource extends ResourceSupport {
     @ApiModelProperty(value = "Nome da campanha", dataType = "string", required = true)
     private String nome;
 
-    @NotNull(message="A identifição do time é obrigatório!")
+    @NotNull(message="A identificação do time é obrigatório!")
     @ApiModelProperty(value = "Id do time do coração", dataType = "string", required = true)
     private String timeCoracaoId;
 
@@ -39,7 +39,7 @@ public class CampanhaResource extends ResourceSupport {
     @ApiModelProperty(value = "Data de inicio de vigência", dataType = "date", required = true)
     private LocalDate inicioVigencia;
 
-    @NotNull(message="O fim vigencia é obrigatório!")
+    @NotNull(message="O fim vigência é obrigatório!")
     @JsonSerialize(using = ToStringSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     @ApiModelProperty(value = "Data de fim de vigência", dataType = "date", required = true)

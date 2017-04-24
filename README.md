@@ -46,26 +46,26 @@ Incluindo campanha 3 : 01/10/2017 a 03/10/2017
 
 ## Informações sobre o projeto
 
-- O caminho **base** para as os endpoins é : /api/v1
+- O caminho **base** para as os endpoins é : **/api/v1**
   - Para esta aplicação temos :  /api/v1/campanhas e /api/v1/webhooks
 
-- Porta da aplicação :8080
+- Porta da aplicação :**8080**
 
-- Para iniciar a aplicação execute : --> gradle bootRun 
+- Para iniciar a aplicação execute : --> **gradle bootRun** 
 
-- Para ver a documentação das APIS inclusive os exemplos usando curl veja --> /documentacao/index.html (ex: http://localhost:8080/documentacao/index.html )
-    -  Para documentar a API usei o swagger caso não conheça o Swagger veja : --> http://swagger.io/ 
+- Para ver a **documentação** e **testar** as APIs inclusive os exemplos usando **curl** veja --> **/documentacao/index.html** (ex: http://localhost:8080/documentacao/index.html )
+    -  Para documentar a API usei o **Swagger** caso não conheça o Swagger veja : --> http://swagger.io/ 
     
-- A aplicação contém um banco de dados MongoDB imbutido que é inicializado junto com aplicação    
-    - Porta para acessar o MongoDB: **54321**
-- Para log veja o arquivo campanha.log criado na raiz da aplicação.
+- A aplicação contém um banco de dados **MongoDB** embutido que é inicializado junto com aplicação    
+    - Porta para acessar o MongoDB: **12345**
+- Para log veja o arquivo **campanha.log** criado na raiz da aplicação.
 
-- Para os recursos expostos eu usei os seguinte:
-    - 200 OK - para GET requests.
-    - 201 Created - para POST.
-    - 204 No Content - para PUT, PATCH, e DELETE requests.
-    - Usei alguns principios de HETEOAS para a API na qual cada recurso tem o **self link** e para criação de novos recursos 
-      é retornado **no header o link para o recurso criado**.
+- Para os recursos expostos eu usei o seguinte:
+    - **200 OK** - para **GET** requests.
+    - **201 Created** - para **POST**.
+    - **204 No Content** - para **PUT**, **PATCH**, e **DELETE** requests.
+    - Usei alguns principios de **HATEOAS** para a API na qual cada recurso tem o **self link** e para criação de novos 
+      recursos é retornado **no header o link para o recurso criado**.
 
 - Java code coverage : **100 % nos pacotes de Rest Controller, Domain e Service**  
                      : 75% das classes | 74% dos Metodos e 74% das linhas de código       

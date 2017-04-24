@@ -32,8 +32,8 @@ public class ApplicationStarter {
     }
 
     /**
-     * Responsible for reading data file from resources (data.json)
-     * transform in a Object and loading to MongoDB
+     * Responsável por ler o arquivo do resources (data.json)
+     * e carregar para o MongoDB
      */
     @Bean
     public AbstractRepositoryPopulatorFactoryBean repositoryPopulator() {

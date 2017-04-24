@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * Serviço para funcionalidades relacionadas a Webhook
+ * Serviço que irá notificar as APIs sobre atualizações em campanhas
  * @author : Claudio Nazareth  chtnazareth@gmail.com
  */
 @Service
@@ -32,6 +32,11 @@ public class WebhookServiceImpl implements WebhookService {
         return webhookRepository.save(new Webhook(url,chaveAcesso));
     }
 
+    /**
+     * Percorre todos os URL cadastrados no webhook e faz uma chamada via POST para as API clientes para notificar a atu
+     * alização de uma campanha.
+     * @param campanha
+     */
     @HystrixCommand(fallbackMethod = "notificarFallback")
     public void notificarAtualizacao(Campanha campanha){
 
@@ -46,9 +51,13 @@ public class WebhookServiceImpl implements WebhookService {
         });
     }
 
+    /**
+     * Método de fallback caso não consiga notificar o sistema da atualização da campanha.
+     * @param campanha
+     */
     public void notificarFallback(Campanha campanha){
-        logger.debug("Este método não foi implementado!!!!");
-        logger.debug("Armazenar esta campanha e tentar notificar novamente");
-        System.out.println("Armazenar esta campanha e tentar notificar novamente");
+        if(logger.isDebugEnabled()) {
+            logger.debug("Este método não foi implementado! :-(");
+        }
     }
 }

@@ -9,10 +9,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- * Representa os dados do Webhook que devem ser recebidos  API Rest de webhook
+ * Representa os dados do Webhook que devem ser recebidos pela API Rest de webhook
  * @author : Claudio Nazareth  chtnazareth@gmail.com
  */
-@ApiModel(value="WebhookResource", description="Representa os dados do Webhook que devem ser recebidos  API Rest de webhook")
+@ApiModel(value="WebhookResource", description="Representa os dados do Webhook que devem ser recebidos pela API Rest de webhook")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class WebhookResource {
 
@@ -21,7 +21,7 @@ public class WebhookResource {
     @ApiModelProperty(value = "URL do Webhook", dataType = "string", required = true)
     private String url;
 
-    @ApiModelProperty(value = "cheve de acesso para a URL", dataType = "string", required = false)
+    @ApiModelProperty(value = "Chave de acesso para a URL", dataType = "string", required = false)
     private String chaveAcesso;
 
     public WebhookResource() {

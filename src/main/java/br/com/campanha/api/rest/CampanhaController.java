@@ -38,7 +38,8 @@ import static org.springframework.http.ResponseEntity.created;
 @RestController
 @RequestMapping("/v1/campanhas")
 @Api(value = "Campanha", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE,
-tags = {"Endpoints da Campanha"}, description = "Lida com todas as requisções de campanha", basePath = "/api/v1/campanhas")
+tags = {"Endpoints da Campanha"}, description = "Lida com todas as requisições para o serviço de campanha",
+basePath = "/api/v1/campanhas")
 public class CampanhaController {
 
     private static final Logger logger = LoggerFactory.getLogger(CampanhaController.class);
@@ -47,8 +48,8 @@ public class CampanhaController {
     private CampanhaService campanhaService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ApiOperation(value = "Cria uma nova Campanha com base nos parametros passados",
-            notes = "Cria uma nova campanha e retorna o link da nova campanha criada",
+    @ApiOperation(value = "Cria uma nova campanha com base nos parametros passados",
+            notes = "Cria uma nova campanha e retorna o link do caminho no header",
             response = ResponseEntity.class)
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Created"),
@@ -72,7 +73,7 @@ public class CampanhaController {
     }
 
     @GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-    @ApiOperation(value = "Busca todos as Campanhas ativas",
+    @ApiOperation(value = "Busca todos as campanhas ativas",
             notes = "Para retornar as Campanhas ativas é usado a data atual",
             response = CampanhaResource.class,
             responseContainer = "List")
@@ -98,8 +99,8 @@ public class CampanhaController {
     }
 
     @GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
-    @ApiOperation(value = "Busca campanha por id",
-            notes = "Retorna a Campanha por ID idependente da data de vigência",
+    @ApiOperation(value = "Busca a campanha por id",
+            notes = "Retorna a campanha por ID idependente da data de vigência",
             response = CampanhaResource.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
@@ -123,8 +124,8 @@ public class CampanhaController {
 
 
     @GetMapping(value = "/time-coracao/{timeCoracao}", produces = { MediaType.APPLICATION_JSON_VALUE })
-    @ApiOperation(value = "Busca campanha por Time do Coração",
-            notes = "Retorna a Campanha por Time do Coração idependente da data de vigência",
+    @ApiOperation(value = "Busca campanha por time do coração",
+            notes = "Retorna a campanha por time do coração idependente da data de vigência",
             response = CampanhaResource.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),
@@ -147,8 +148,8 @@ public class CampanhaController {
     }
 
     @DeleteMapping(value = "/{id}")
-    @ApiOperation(value = "Deleta a Campanha por id",
-            notes = "Deleta a Campanha por ID idependente da data de vigência",
+    @ApiOperation(value = "Deleta a campanha por id",
+            notes = "Deleta a campanha por ID idependente da data de vigência",
             response = ResponseEntity.class)
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "No Content"),
@@ -164,8 +165,8 @@ public class CampanhaController {
     }
 
     @PutMapping(value = "/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE })
-    @ApiOperation(value = "Atualiza a Campanha por id",
-            notes = "Atualiza a Campanha por ID idependente da data de vigência",
+    @ApiOperation(value = "Atualiza a campanha por id",
+            notes = "Atualiza a campanha por ID idependente da data de vigência",
             response = ResponseEntity.class)
     @ApiResponses(value = {
             @ApiResponse(code = 204, message = "No Content"),
@@ -187,7 +188,7 @@ public class CampanhaController {
     }
 
     /*
-     * Os métodos abaixo capturam a eexecção e retornam o Status e messagem de erro de acordo com o tipo de Exception
+     * Os métodos abaixo capturam a exceção e retornam o Status HTTP e mensagem de erro de acordo com o tipo de Exception
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
@@ -196,11 +197,6 @@ public class CampanhaController {
         return new ErrorInfo(ServletUriComponentsBuilder.fromCurrentRequest().path("").toUriString() , ex);
     }
 
-    /**
-     * Retorna os erros de validação para o chamador
-     * @param ex
-     * @return
-     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseBody ErrorInfo
@@ -208,11 +204,6 @@ public class CampanhaController {
         return new ErrorInfo(ServletUriComponentsBuilder.fromCurrentRequest().path("").toUriString() ,ex);
     }
 
-    /**
-     * Retorna os erros de validação para o chamador
-     * @param ex
-     * @return
-     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseBody ErrorInfo
@@ -226,6 +217,4 @@ public class CampanhaController {
     handleNotFoundException( RecursoNaoEncontradoException ex) {
         return new ErrorInfo(ServletUriComponentsBuilder.fromCurrentRequest().path("").toUriString() ,ex);
     }
-
-
 }

@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * Entidade representa os dados da base de Campanhas.
+ * Entidade representa os dados do documento MongoDB de Campanhas.
  * @author : Claudio Nazareth  chtnazareth@gmail.com
  */
 @Document
@@ -31,7 +31,7 @@ public class Campanha {
     @Field(value = "nome")
     private String nome;
 
-    @NotNull(message="A identifição do time é obrigatório!")
+    @NotNull(message="A identificação do time é obrigatório!")
     @Field(value = "timeCoracaoId")
     private String timeCoracaoId;
 
