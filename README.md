@@ -68,7 +68,7 @@ Incluindo campanha 3 : 01/10/2017 a 03/10/2017
       recursos é retornado **no header o link para o recurso criado**.
 
 - Java code coverage : **100 % nos pacotes de Rest Controller, Domain e Service**  
-                     : 75% das classes | 74% dos Metodos e 74% das linhas de código       
+                     : 85% das classes | 34% dos Metodos e 64% das linhas de código       
 
 ## Tecnologias e frameworks utilizados
 
