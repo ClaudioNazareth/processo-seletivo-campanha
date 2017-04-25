@@ -22,6 +22,7 @@ public interface CampanhaRepository extends MongoRepository<Campanha, String> {
     @Query("{ 'inicioVigencia' : { $gte: ?0, $lte: ?1}, 'fimVigencia' : { $gte: ?0, $lte: ?1 } } , $orderby: { fimVigencia : 1 }")
     List<Campanha> buscarCampanhasAtivasPorPeriodo(LocalDate inicioVigencia, LocalDate fimVigencia);
 
-    List<Campanha> findByTimeCoracaoIdIgnoreCase(String timeCoracaoId);
+    List<Campanha> findByTimeCoracaoIdIgnoreCaseAndInicioVigenciaIsLessThanEqualAndFimVigenciaIsGreaterThanEqual
+            (String timeCoracaoId, LocalDate inicioVigencia, LocalDate fimVigencia);
 
 }

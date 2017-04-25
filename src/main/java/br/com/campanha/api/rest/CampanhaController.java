@@ -125,7 +125,7 @@ public class CampanhaController {
 
     @GetMapping(value = "/time-coracao/{timeCoracao}", produces = { MediaType.APPLICATION_JSON_VALUE })
     @ApiOperation(value = "Busca campanha por time do coração",
-            notes = "Retorna a campanha por time do coração idependente da data de vigência",
+            notes = "Retorna a campanha por time do coração somente para campanhas ativas",
             response = CampanhaResource.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "OK"),

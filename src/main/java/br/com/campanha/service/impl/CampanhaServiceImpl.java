@@ -88,7 +88,8 @@ public class CampanhaServiceImpl implements CampanhaService {
 
     @Override
     public List<Campanha> buscaPorTimeDoCoracao(String timeDoCoracao) {
-        return campanhaRepository.findByTimeCoracaoIdIgnoreCase(timeDoCoracao);
+        return campanhaRepository.
+                findByTimeCoracaoIdIgnoreCaseAndInicioVigenciaIsLessThanEqualAndFimVigenciaIsGreaterThanEqual(timeDoCoracao, LocalDate.now(), LocalDate.now());
     }
 
     /**

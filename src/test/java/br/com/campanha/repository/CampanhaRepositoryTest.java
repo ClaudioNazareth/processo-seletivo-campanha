@@ -109,7 +109,9 @@ public class CampanhaRepositoryTest {
 
     @Test
     public void findByTimeCoracaoIdIgnoreCaseTest() throws Exception {
-        assertThat(campanhaRepository.findByTimeCoracaoIdIgnoreCase("TIME-1001"))
+        assertThat(campanhaRepository.
+                findByTimeCoracaoIdIgnoreCaseAndInicioVigenciaIsLessThanEqualAndFimVigenciaIsGreaterThanEqual
+                        ("TIME-1001", LocalDate.of(2017,10,02), LocalDate.of(2017,10,02)))
                 .as("Deve encontrar uma Campanha com o Time TIME-1001")
                 .hasSize(1);
     }

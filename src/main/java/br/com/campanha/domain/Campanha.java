@@ -31,6 +31,7 @@ public class Campanha {
     @Field(value = "nome")
     private String nome;
 
+    @Indexed
     @NotNull(message="A identificação do time é obrigatório!")
     @Field(value = "timeCoracaoId")
     private String timeCoracaoId;
