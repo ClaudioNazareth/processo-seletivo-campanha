@@ -45,7 +45,7 @@ public class WebhookControllerTest {
     }
 
     @Test
-    public void cadastrarCampanhaTest() throws Exception {
+    public void cadastrarWebhookTest() throws Exception {
         final ResponseEntity<?> responseEntity =
                 webhookController.cadastrarWebhook(new WebhookResource("http://localhost:8080/api/v1/hook", "@#$GDFG%$GH"));
         assertThat(responseEntity).as("O webhook deve ser criado com sucesso").isNotNull();

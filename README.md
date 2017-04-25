@@ -46,8 +46,11 @@ Incluindo campanha 3 : 01/10/2017 a 03/10/2017
 
 ## Informações sobre o projeto
 
+ - **_Não ficou claro o que é uma campanha dentro da vigência, levei em consideração data de inicio e fim vigência devem estar
+  dentro do inicio e fim vigência da campanha a ser cadastrada, campapnha com datas de inicio menores e de fim  vigência maiores serão desconsideradas_**
+
 - O caminho **base** para as os endpoins é : **/api/v1**
-  - Para esta aplicação temos :  /api/v1/campanhas e /api/v1/webhooks
+  - Para esta aplicação temos :  **/api/v1/campanhas** e **/api/v1/webhooks**
 
 - Porta da aplicação :**8080**
 
@@ -68,7 +71,7 @@ Incluindo campanha 3 : 01/10/2017 a 03/10/2017
       recursos é retornado **no header o link para o recurso criado**.
 
 - Java code coverage : **100 % nos pacotes de Rest Controller, Domain e Service**  
-                     : 85% das classes | 34% dos Metodos e 64% das linhas de código       
+                     : **85%** das classes | **64%** dos Metodos e **64%** das linhas de código       
 
 ## Tecnologias e frameworks utilizados
 
